@@ -151,6 +151,18 @@ const Navbar = () => {
           {/* Language Switcher */}
           <LanguageSwitcher />
 
+          {/* Theme Toggle (when no user) */}
+          {!userEmail && (
+            <motion.button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-xl border border-white/20 hover:border-purple-400/50 text-white hover:text-cyan-300 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </motion.button>
+          )}
+
           {/* Profile Button */}
           {userEmail && (
             <DropdownMenu>
@@ -175,6 +187,14 @@ const Navbar = () => {
                   <p className="text-xs text-gray-400 mb-1">Email</p>
                   <p className="text-sm text-cyan-300 font-medium truncate">{userEmail}</p>
                 </div>
+                <DropdownMenuItem
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className="text-white hover:text-cyan-300 cursor-pointer hover:bg-purple-500/20 transition-all duration-300"
+                >
+                  {theme === "dark" ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
+                  {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-purple-500/20" />
                 <DropdownMenuItem
                   onClick={() => navigate("/profiles")}
                   className="text-white hover:text-cyan-300 cursor-pointer hover:bg-purple-500/20 transition-all duration-300"
