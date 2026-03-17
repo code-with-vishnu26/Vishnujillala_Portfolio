@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Moon, Sun, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useTheme } from "next-themes";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut } from "lucide-react";
 
 const Navbar = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -149,6 +151,18 @@ const Navbar = () => {
           {/* Language Switcher */}
           <LanguageSwitcher />
 
+          {/* Theme Toggle (when no user) */}
+          {!userEmail && (
+            <motion.button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-xl border border-white/20 hover:border-purple-400/50 text-white hover:text-cyan-300 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </motion.button>
+          )}
+
           {/* Profile Button */}
           {userEmail && (
             <DropdownMenu>
@@ -174,6 +188,14 @@ const Navbar = () => {
                   <p className="text-sm text-cyan-300 font-medium truncate">{userEmail}</p>
                 </div>
                 <DropdownMenuItem
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className="text-white hover:text-cyan-300 cursor-pointer hover:bg-purple-500/20 transition-all duration-300"
+                >
+                  {theme === "dark" ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
+                  {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-purple-500/20" />
+                <DropdownMenuItem
                   onClick={() => navigate("/profiles")}
                   className="text-white hover:text-cyan-300 cursor-pointer hover:bg-purple-500/20 transition-all duration-300"
                 >
@@ -188,6 +210,17 @@ const Navbar = () => {
         {/* Mobile Menu Controls */}
         <div className="flex lg:hidden items-center gap-2">
           <LanguageSwitcher />
+
+          {/* Mobile theme toggle (when no user) */}
+          {!userEmail && (
+            <motion.button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-xl border border-white/20 text-white"
+              whileTap={{ scale: 0.95 }}
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </motion.button>
+          )}
           
           {userEmail && (
             <DropdownMenu>
@@ -208,6 +241,14 @@ const Navbar = () => {
                   <p className="text-xs text-gray-400">Email</p>
                   <p className="text-sm text-cyan-300 font-medium truncate">{userEmail}</p>
                 </div>
+                <DropdownMenuItem
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className="text-white hover:text-cyan-300 cursor-pointer"
+                >
+                  {theme === "dark" ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
+                  {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-purple-500/20" />
                 <DropdownMenuItem
                   onClick={() => navigate("/profiles")}
                   className="text-white hover:text-cyan-300 cursor-pointer"
