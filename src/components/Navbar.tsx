@@ -18,6 +18,7 @@ import {
 const Navbar = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
