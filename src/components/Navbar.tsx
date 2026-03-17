@@ -26,7 +26,6 @@ const Navbar = () => {
   const [userEmail, setUserEmail] = useState<string>("");
   const [isMobile, setIsMobile] = useState(false);
 
-  // Track window width for mobile detection
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
@@ -37,16 +36,12 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
       setScrolled(currentScrollY > 50);
-      
-      // Hide navbar on scroll down, show on scroll up
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setVisible(false);
       } else {
         setVisible(true);
       }
-      
       setLastScrollY(currentScrollY);
     };
     window.addEventListener("scroll", handleScroll);
@@ -55,19 +50,11 @@ const Navbar = () => {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user?.email) {
-        setUserEmail(session.user.email);
-      }
+      if (session?.user?.email) setUserEmail(session.user.email);
     });
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user?.email) {
-        setUserEmail(session.user.email);
-      } else {
-        setUserEmail("");
-      }
+      setUserEmail(session?.user?.email || "");
     });
-
     return () => subscription.unsubscribe();
   }, []);
 
@@ -83,29 +70,19 @@ const Navbar = () => {
 
   const handleNavClick = (item: string) => {
     setIsOpen(false);
-    
     if (item === "Resume") {
       window.open("https://drive.google.com/uc?export=download&id=1tzCxxKywTCItE8WycimCWmbHQXDnHC0p", "_blank");
       return;
     }
-    
     const sectionMap: { [key: string]: string } = {
-      "Home": "hero",
-      "About": "about", 
-      "Projects": "projects",
-      "Journey": "professional-journey",
-      "Certifications": "certifications",
-      "Contact": "contact"
+      "Home": "hero", "About": "about", "Projects": "projects",
+      "Journey": "professional-journey", "Certifications": "certifications", "Contact": "contact"
     };
-    
     const targetId = sectionMap[item];
     if (targetId === "hero") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (targetId) {
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+      document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -114,32 +91,32 @@ const Navbar = () => {
       initial={{ y: 0 }}
       animate={{ y: visible ? 0 : -100 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-transparent backdrop-blur-sm" : "bg-transparent"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        scrolled 
+          ? "bg-white/70 dark:bg-black/30 backdrop-blur-lg shadow-sm dark:shadow-none border-b border-border/50 dark:border-transparent" 
+          : "bg-transparent"
       }`}
     >
       <div className="flex justify-between items-center px-3 sm:px-4 py-3 sm:py-4">
-        {/* Logo / Brand */}
         <motion.button 
-          className="px-3 sm:px-6 py-2 sm:py-3 text-white ml-2 sm:ml-8 cursor-pointer relative group bg-transparent rounded-2xl border border-transparent transition-all duration-300"
+          className="px-3 sm:px-6 py-2 sm:py-3 ml-2 sm:ml-8 cursor-pointer relative group bg-transparent rounded-2xl border border-transparent transition-all duration-300"
           onClick={() => window.location.reload()}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <span className="relative z-10 text-lg sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent uppercase">
+          <span className="relative z-10 text-lg sm:text-2xl font-bold bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 dark:from-cyan-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent uppercase">
             Portfolio
           </span>
         </motion.button>
 
-        {/* Desktop Menu Items */}
+        {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-4">
-          {/* Desktop Menu Items - Always visible */}
           <div className="flex flex-row gap-2">
-            {menuItems.map((item, index) => (
+            {menuItems.map((item) => (
               <motion.button
                 key={item.key}
                 onClick={() => handleNavClick(item.value)}
-                className="px-4 py-2 text-sm font-medium text-white hover:text-cyan-300 rounded-xl transition-all duration-300 hover:bg-purple-500/20 border border-transparent hover:border-purple-400/50 uppercase"
+                className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary rounded-xl transition-all duration-300 hover:bg-primary/10 border border-transparent hover:border-primary/20 uppercase"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -148,14 +125,12 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Language Switcher */}
           <LanguageSwitcher />
 
-          {/* Theme Toggle (when no user) */}
           {!userEmail && (
             <motion.button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-xl border border-white/20 hover:border-purple-400/50 text-white hover:text-cyan-300 transition-all duration-300"
+              className="p-2 rounded-xl border border-border hover:border-primary/50 text-foreground hover:text-primary transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -163,16 +138,11 @@ const Navbar = () => {
             </motion.button>
           )}
 
-          {/* Profile Button */}
           {userEmail && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <motion.button
-                  className="relative group"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Avatar className="h-10 w-10 border-2 border-white/30 hover:border-white/50 transition-all duration-300 cursor-pointer">
+                <motion.button className="relative group" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Avatar className="h-10 w-10 border-2 border-foreground/20 hover:border-primary/50 transition-all duration-300 cursor-pointer">
                     <AvatarFallback className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-white font-bold text-lg">
                       {userEmail.charAt(0).toUpperCase()}
                     </AvatarFallback>
@@ -181,23 +151,23 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent 
                 align="end" 
-                className="w-56 bg-gradient-to-r from-slate-800/95 via-purple-800/90 to-slate-800/95 backdrop-blur-xl border border-purple-500/30 shadow-2xl shadow-purple-500/20"
+                className="w-56 bg-card/95 backdrop-blur-xl border border-border shadow-2xl"
               >
-                <div className="px-3 py-3 border-b border-purple-500/20">
-                  <p className="text-xs text-gray-400 mb-1">Email</p>
-                  <p className="text-sm text-cyan-300 font-medium truncate">{userEmail}</p>
+                <div className="px-3 py-3 border-b border-border">
+                  <p className="text-xs text-muted-foreground mb-1">Email</p>
+                  <p className="text-sm text-primary font-medium truncate">{userEmail}</p>
                 </div>
                 <DropdownMenuItem
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="text-white hover:text-cyan-300 cursor-pointer hover:bg-purple-500/20 transition-all duration-300"
+                  className="text-foreground cursor-pointer hover:bg-primary/10 transition-all duration-300"
                 >
                   {theme === "dark" ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
                   {theme === "dark" ? "Light Mode" : "Dark Mode"}
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-purple-500/20" />
+                <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onClick={() => navigate("/profiles")}
-                  className="text-white hover:text-cyan-300 cursor-pointer hover:bg-purple-500/20 transition-all duration-300"
+                  className="text-foreground cursor-pointer hover:bg-primary/10 transition-all duration-300"
                 >
                   <LogOut className="mr-2 h-4 w-4" />
                   Exit
@@ -210,48 +180,42 @@ const Navbar = () => {
         {/* Mobile Menu Controls */}
         <div className="flex lg:hidden items-center gap-2">
           <LanguageSwitcher />
-
-          {/* Mobile theme toggle (when no user) */}
           {!userEmail && (
             <motion.button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-xl border border-white/20 text-white"
+              className="p-2 rounded-xl border border-border text-foreground"
               whileTap={{ scale: 0.95 }}
             >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </motion.button>
           )}
-          
           {userEmail && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <motion.button className="relative" whileTap={{ scale: 0.95 }}>
-                  <Avatar className="h-8 w-8 border-2 border-white/30">
+                  <Avatar className="h-8 w-8 border-2 border-foreground/20">
                     <AvatarFallback className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-white font-bold text-sm">
                       {userEmail.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                 </motion.button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent 
-                align="end" 
-                className="w-48 bg-slate-800/95 backdrop-blur-xl border border-purple-500/30"
-              >
-                <div className="px-3 py-2 border-b border-purple-500/20">
-                  <p className="text-xs text-gray-400">Email</p>
-                  <p className="text-sm text-cyan-300 font-medium truncate">{userEmail}</p>
+              <DropdownMenuContent align="end" className="w-48 bg-card/95 backdrop-blur-xl border border-border">
+                <div className="px-3 py-2 border-b border-border">
+                  <p className="text-xs text-muted-foreground">Email</p>
+                  <p className="text-sm text-primary font-medium truncate">{userEmail}</p>
                 </div>
                 <DropdownMenuItem
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="text-white hover:text-cyan-300 cursor-pointer"
+                  className="text-foreground cursor-pointer"
                 >
                   {theme === "dark" ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
                   {theme === "dark" ? "Light Mode" : "Dark Mode"}
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-purple-500/20" />
+                <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onClick={() => navigate("/profiles")}
-                  className="text-white hover:text-cyan-300 cursor-pointer"
+                  className="text-foreground cursor-pointer"
                 >
                   <LogOut className="mr-2 h-4 w-4" />
                   Exit
@@ -259,10 +223,9 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
-
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 bg-transparent text-white rounded-xl border border-white/30"
+            className="p-2 bg-transparent text-foreground rounded-xl border border-border"
             whileTap={{ scale: 0.95 }}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -278,7 +241,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-black/90 backdrop-blur-lg border-t border-white/10"
+            className="lg:hidden bg-background/95 backdrop-blur-lg border-t border-border"
           >
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col gap-2">
@@ -289,7 +252,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
                     onClick={() => handleNavClick(item.value)}
-                    className="w-full text-left px-4 py-3 text-white hover:text-cyan-300 hover:bg-white/5 rounded-xl transition-all duration-200 text-base font-medium uppercase"
+                    className="w-full text-left px-4 py-3 text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-all duration-200 text-base font-medium uppercase"
                   >
                     {t(item.key)}
                   </motion.button>

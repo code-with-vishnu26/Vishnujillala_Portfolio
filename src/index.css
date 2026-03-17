@@ -2,42 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    /* Light mode colors */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Light mode - soft gradient feel */
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 47% 11%;
 
     --primary: 217 91% 60%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 20% 93%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 15% 92%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 220 20% 93%;
+    --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 220 13% 87%;
+    --input: 220 13% 87%;
     --ring: 217 91% 60%;
 
     --radius: 0.5rem;
+
+    /* Light mode specific tokens */
+    --glass-bg: 220 60% 98% / 0.7;
+    --glass-border: 220 60% 80% / 0.3;
+    --card-glass: 0 0% 100% / 0.6;
+    --text-primary: 222 47% 11%;
+    --text-secondary: 215 20% 35%;
+    --text-muted: 215 16% 47%;
+    --particle-color: 217 91% 60%;
+    --particle-opacity: 0.08;
+    --grid-opacity: 0.06;
+    --glow-opacity: 0.08;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -46,7 +54,7 @@ All colors MUST be HSL.
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 217 91% 60%;
   }
 
   .dark {
@@ -72,21 +80,33 @@ All colors MUST be HSL.
     --accent: 0 0% 15%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 20%;
     --input: 0 0% 15%;
     --ring: 217 91% 60%;
 
+    /* Dark mode specific tokens */
+    --glass-bg: 0 0% 100% / 0.05;
+    --glass-border: 0 0% 100% / 0.1;
+    --card-glass: 0 0% 100% / 0.05;
+    --text-primary: 0 0% 100%;
+    --text-secondary: 0 0% 80%;
+    --text-muted: 0 0% 60%;
+    --particle-color: 217 91% 60%;
+    --particle-opacity: 0.3;
+    --grid-opacity: 0.03;
+    --glow-opacity: 0.05;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 224 76% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 217 91% 60%;
   }
 }
 
@@ -103,40 +123,59 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans transition-colors duration-500;
   }
 
-  /* Typography hierarchy */
   h1 {
     @apply text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
   }
-
   h2 {
     @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
   }
-
   h3 {
     @apply text-2xl md:text-3xl font-semibold tracking-tight;
   }
-
   h4 {
     @apply text-xl md:text-2xl font-semibold tracking-tight;
   }
-
   h5 {
     @apply text-lg md:text-xl font-medium;
   }
-
   h6 {
     @apply text-base md:text-lg font-medium;
   }
-
   p {
     @apply text-base leading-relaxed;
   }
 
-  /* Smooth text selection */
   ::selection {
     @apply bg-primary/30;
+  }
+}
+
+/* Theme-aware utility classes */
+@layer components {
+  /* Glass card that works in both modes */
+  .theme-card {
+    @apply bg-card/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl border border-border dark:border-white/10 transition-all duration-300;
+  }
+  .theme-card:hover {
+    @apply bg-card/80 dark:bg-white/10;
+  }
+
+  /* Text classes */
+  .theme-text {
+    @apply text-foreground;
+  }
+  .theme-text-secondary {
+    @apply text-muted-foreground;
+  }
+
+  /* Navbar glass */
+  .theme-navbar {
+    @apply bg-white/70 dark:bg-transparent backdrop-blur-md dark:backdrop-blur-sm;
+  }
+  .theme-navbar-scrolled {
+    @apply bg-white/80 dark:bg-transparent backdrop-blur-lg dark:backdrop-blur-sm shadow-sm dark:shadow-none;
   }
 }
