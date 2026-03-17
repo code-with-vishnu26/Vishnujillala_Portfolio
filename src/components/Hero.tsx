@@ -15,7 +15,6 @@ const Hero = () => {
       
       <div className="container mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left side - Text content */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -23,7 +22,7 @@ const Hero = () => {
             className="space-y-4 md:space-y-6 text-center lg:text-left order-2 lg:order-1"
           >
             <motion.h2 
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-gray-300"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-muted-foreground"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -32,7 +31,7 @@ const Hero = () => {
             </motion.h2>
             
             <motion.h1 
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent leading-tight"
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.8, type: "spring" }}
@@ -40,7 +39,6 @@ const Hero = () => {
               {t('hero.name')}
             </motion.h1>
             
-            {/* Rotating text positioned directly below name */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -51,7 +49,7 @@ const Hero = () => {
             </motion.div>
             
             <motion.p 
-              className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed mt-4"
+              className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed mt-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.8 }}
@@ -81,14 +79,13 @@ const Hero = () => {
                 href="https://drive.google.com/uc?export=download&id=1LnZTFVzXaXV0IF8h0rPkJU_Rol5bRrrf" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 border border-gray-400 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 text-xs sm:text-sm md:text-base text-center text-white whitespace-nowrap"
+                className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 border border-foreground/30 dark:border-gray-400 rounded-full font-semibold hover:bg-foreground/5 dark:hover:bg-white/10 transition-all duration-300 text-xs sm:text-sm md:text-base text-center text-foreground whitespace-nowrap"
               >
                 {t('hero.downloadResume')}
               </a>
             </motion.div>
           </motion.div>
           
-          {/* Right side - Image/Visual content */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -110,7 +107,7 @@ const Hero = () => {
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <ChevronDown size={24} className="text-gray-400 sm:w-8 sm:h-8" />
+        <ChevronDown size={24} className="text-muted-foreground sm:w-8 sm:h-8" />
       </motion.div>
     </section>
   );

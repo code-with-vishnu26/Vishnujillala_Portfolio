@@ -46,28 +46,26 @@ const Certifications = () => {
       transition={{ duration: 0.6, delay: index * 0.05 }}
       viewport={{ once: true }}
       whileHover={{ scale: 1.02 }}
-      className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-5 md:p-6 border border-white/10 group cursor-pointer block"
+      className="bg-card/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-5 md:p-6 border border-border dark:border-white/10 group cursor-pointer block shadow-sm dark:shadow-none hover:shadow-lg dark:hover:shadow-none transition-all duration-300"
     >
       <div className="flex items-start space-x-3 sm:space-x-4">
         <div className="text-2xl sm:text-3xl md:text-4xl flex-shrink-0">{cert.badge}</div>
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-2 mb-2">
-            <h3 className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 leading-tight">
-              {cert.title}
-            </h3>
-            <div className="flex items-center space-x-1 text-xs sm:text-sm text-gray-400 flex-shrink-0">
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">{cert.title}</h3>
+            <div className="flex items-center space-x-1 text-xs sm:text-sm text-muted-foreground flex-shrink-0">
               <Calendar size={12} className="sm:w-[14px] sm:h-[14px]" />
               <span>{cert.date}</span>
             </div>
           </div>
-          <p className="text-blue-300 font-medium mb-1 sm:mb-2 text-sm sm:text-base">{cert.issuer}</p>
-          <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-3 line-clamp-2">{cert.description}</p>
+          <p className="text-blue-600 dark:text-blue-300 font-medium mb-1 sm:mb-2 text-sm sm:text-base">{cert.issuer}</p>
+          <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-3 line-clamp-2">{cert.description}</p>
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-400">
-              <Award size={14} className="text-yellow-400 sm:w-4 sm:h-4" />
+            <div className="flex items-center space-x-2 text-xs sm:text-sm text-muted-foreground">
+              <Award size={14} className="text-yellow-500 dark:text-yellow-400 sm:w-4 sm:h-4" />
               <span>Coursera Verified</span>
             </div>
-            <ExternalLink size={14} className="text-gray-500 group-hover:text-blue-400 transition-colors" />
+            <ExternalLink size={14} className="text-muted-foreground/50 group-hover:text-primary transition-colors" />
           </div>
         </div>
       </div>
@@ -77,53 +75,27 @@ const Certifications = () => {
   return (
     <section id="certifications" className="py-12 sm:py-16 md:py-20 relative z-10">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-10 sm:mb-12 md:mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            {t('certifications.title')}
-          </h2>
-          <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"></div>
+        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">{t('certifications.title')}</h2>
+          <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 mx-auto rounded-full"></div>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {visibleCerts.map((cert, index) => (
-            <CertCard key={index} cert={cert} index={index} />
-          ))}
+          {visibleCerts.map((cert, index) => (<CertCard key={index} cert={cert} index={index} />))}
         </div>
 
         <AnimatePresence>
           {showAll && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="overflow-hidden"
-            >
+            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.5, ease: "easeInOut" }} className="overflow-hidden">
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-4 sm:mt-6">
-                {hiddenCerts.map((cert, index) => (
-                  <CertCard key={index + 6} cert={cert} index={index} />
-                ))}
+                {hiddenCerts.map((cert, index) => (<CertCard key={index + 6} cert={cert} index={index} />))}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-8 sm:mt-10"
-        >
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 rounded-full text-white hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300"
-          >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-8 sm:mt-10">
+          <button onClick={() => setShowAll(!showAll)} className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 border border-blue-500/20 dark:border-blue-400/30 rounded-full text-foreground hover:from-blue-500/20 hover:to-purple-500/20 dark:hover:from-blue-500/30 dark:hover:to-purple-500/30 transition-all duration-300">
             {showAll ? "Show Less" : `View All ${certifications.length} Certificates`}
             {showAll ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
           </button>

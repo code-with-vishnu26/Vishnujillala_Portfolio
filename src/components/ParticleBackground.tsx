@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
 
 interface Particle {
   x: number;
@@ -20,6 +21,12 @@ interface CodeSymbol {
 
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { resolvedTheme } = useTheme();
+  const themeRef = useRef(resolvedTheme);
+
+  useEffect(() => {
+    themeRef.current = resolvedTheme;
+  }, [resolvedTheme]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -31,10 +38,8 @@ const ParticleBackground = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // Tech symbols for floating effect
     const symbols = ['</', '/>', '{ }', '( )', '[ ]', '&&', '||', '=>', '++', '--', '::'];
     
-    // Initialize particles for network effect
     const particleCount = 60;
     const particles: Particle[] = [];
     
@@ -49,7 +54,6 @@ const ParticleBackground = () => {
       });
     }
 
-    // Initialize floating code symbols
     const codeSymbols: CodeSymbol[] = [];
     for (let i = 0; i < 15; i++) {
       codeSymbols.push({
@@ -62,31 +66,68 @@ const ParticleBackground = () => {
       });
     }
 
-    const drawGrid = () => {
+    const animate = () => {
+      const isDark = themeRef.current === 'dark';
+      
+      // Background gradient
+      const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      if (isDark) {
+        bgGradient.addColorStop(0, '#0a0a0f');
+        bgGradient.addColorStop(0.5, '#0d1117');
+        bgGradient.addColorStop(1, '#0a0a0f');
+      } else {
+        bgGradient.addColorStop(0, '#f0f4ff');
+        bgGradient.addColorStop(0.3, '#e8eeff');
+        bgGradient.addColorStop(0.7, '#f0ecff');
+        bgGradient.addColorStop(1, '#f0f4ff');
+      }
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Grid
       const gridSize = 50;
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.03)';
+      const gridOpacity = isDark ? 0.03 : 0.06;
+      ctx.strokeStyle = isDark 
+        ? `rgba(59, 130, 246, ${gridOpacity})` 
+        : `rgba(99, 102, 241, ${gridOpacity})`;
       ctx.lineWidth = 1;
 
-      // Vertical lines
       for (let x = 0; x < canvas.width; x += gridSize) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
         ctx.stroke();
       }
-
-      // Horizontal lines
       for (let y = 0; y < canvas.height; y += gridSize) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(canvas.width, y);
         ctx.stroke();
       }
-    };
 
-    const drawConnections = () => {
+      // Particles
+      const particleOpacity = isDark ? 1 : 0.4;
+      particles.forEach((particle) => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        if (particle.x < 0) particle.x = canvas.width;
+        if (particle.x > canvas.width) particle.x = 0;
+        if (particle.y < 0) particle.y = canvas.height;
+        if (particle.y > canvas.height) particle.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        if (isDark) {
+          ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity * particleOpacity})`;
+        } else {
+          ctx.fillStyle = `rgba(99, 102, 241, ${particle.opacity * particleOpacity})`;
+        }
+        ctx.fill();
+      });
+
+      // Connections
       const maxDistance = 150;
-      
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -94,9 +135,11 @@ const ParticleBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
           
           if (distance < maxDistance) {
-            const opacity = (1 - distance / maxDistance) * 0.15;
+            const opacity = (1 - distance / maxDistance) * (isDark ? 0.15 : 0.08);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
+            ctx.strokeStyle = isDark 
+              ? `rgba(59, 130, 246, ${opacity})`
+              : `rgba(99, 102, 241, ${opacity})`;
             ctx.lineWidth = 1;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -104,59 +147,29 @@ const ParticleBackground = () => {
           }
         }
       }
-    };
 
-    const animate = () => {
-      // Dark gradient background
-      const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      bgGradient.addColorStop(0, '#0a0a0f');
-      bgGradient.addColorStop(0.5, '#0d1117');
-      bgGradient.addColorStop(1, '#0a0a0f');
-      ctx.fillStyle = bgGradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Draw subtle grid
-      drawGrid();
-
-      // Update and draw particles
-      particles.forEach((particle) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        // Wrap around
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
-
-        // Draw particle
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity})`;
-        ctx.fill();
-      });
-
-      // Draw connections between particles
-      drawConnections();
-
-      // Update and draw floating code symbols
+      // Code symbols
+      const symbolOpacity = isDark ? 1 : 0.5;
       codeSymbols.forEach((symbol) => {
         symbol.y -= symbol.speed;
-        
-        // Reset position when off screen
         if (symbol.y < -30) {
           symbol.y = canvas.height + 30;
           symbol.x = Math.random() * canvas.width;
         }
 
         ctx.font = `${symbol.size}px 'Fira Code', monospace`;
-        ctx.fillStyle = `rgba(99, 102, 241, ${symbol.opacity})`;
+        if (isDark) {
+          ctx.fillStyle = `rgba(99, 102, 241, ${symbol.opacity * symbolOpacity})`;
+        } else {
+          ctx.fillStyle = `rgba(99, 102, 241, ${symbol.opacity * symbolOpacity})`;
+        }
         ctx.fillText(symbol.symbol, symbol.x, symbol.y);
       });
 
-      // Subtle corner glow effects
+      // Corner glows
+      const glowIntensity = isDark ? 0.05 : 0.08;
       const glowGradient1 = ctx.createRadialGradient(0, 0, 0, 0, 0, canvas.width * 0.4);
-      glowGradient1.addColorStop(0, 'rgba(59, 130, 246, 0.05)');
+      glowGradient1.addColorStop(0, isDark ? `rgba(59, 130, 246, ${glowIntensity})` : `rgba(99, 102, 241, ${glowIntensity})`);
       glowGradient1.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = glowGradient1;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -165,7 +178,7 @@ const ParticleBackground = () => {
         canvas.width, canvas.height, 0,
         canvas.width, canvas.height, canvas.width * 0.4
       );
-      glowGradient2.addColorStop(0, 'rgba(99, 102, 241, 0.04)');
+      glowGradient2.addColorStop(0, isDark ? `rgba(99, 102, 241, 0.04)` : `rgba(168, 85, 247, ${glowIntensity})`);
       glowGradient2.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = glowGradient2;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
