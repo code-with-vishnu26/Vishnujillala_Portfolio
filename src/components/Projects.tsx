@@ -39,7 +39,7 @@ const Projects = () => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
       whileHover={{ y: -10 }}
-      className="bg-card/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-border dark:border-white/10 group shadow-sm dark:shadow-none hover:shadow-lg dark:hover:shadow-none transition-all duration-300"
+      className="bg-card/70 dark:bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-border/60 dark:border-white/10 group shadow-sm shadow-primary/5 dark:shadow-none hover:shadow-xl hover:shadow-primary/10 dark:hover:shadow-none transition-all duration-300"
     >
       {project.image && (
         <div className="h-36 sm:h-40 md:h-48 overflow-hidden">
