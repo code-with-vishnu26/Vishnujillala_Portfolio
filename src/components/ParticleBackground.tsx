@@ -40,6 +40,7 @@ const ParticleBackground = () => {
 
     const symbols = ['</', '/>', '{ }', '( )', '[ ]', '&&', '||', '=>', '++', '--', '::'];
     
+    const isDarkMode = () => themeRef.current === 'dark';
     const particleCount = 60;
     const particles: Particle[] = [];
     
@@ -47,10 +48,10 @@ const ParticleBackground = () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: 2 + Math.random() * 2,
-        opacity: 0.3 + Math.random() * 0.4,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        size: 1.5 + Math.random() * 1.5,
+        opacity: 0.2 + Math.random() * 0.3,
       });
     }
 
