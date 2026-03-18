@@ -83,7 +83,7 @@ const Contact = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
-            <form onSubmit={handleSubmit} className="bg-card/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl p-5 sm:p-6 md:p-8 border border-border dark:border-white/10 space-y-4 sm:space-y-6 shadow-sm dark:shadow-none">
+            <form onSubmit={handleSubmit} className="bg-card/70 dark:bg-white/5 backdrop-blur-md rounded-2xl p-5 sm:p-6 md:p-8 border border-border/60 dark:border-white/10 space-y-4 sm:space-y-6 shadow-md shadow-primary/5 dark:shadow-none">
               <div>
                 <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-muted-foreground mb-2">{t('contact.name')}</label>
                 <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-background/50 dark:bg-white/5 border border-border dark:border-white/20 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary transition-colors duration-200 text-sm sm:text-base" placeholder={t('contact.namePlaceholder')} />
