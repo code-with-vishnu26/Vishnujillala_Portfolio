@@ -157,10 +157,10 @@
 @layer components {
   /* Glass card that works in both modes */
   .theme-card {
-    @apply bg-card/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl border border-border dark:border-white/10 transition-all duration-300;
+    @apply bg-card/70 dark:bg-white/5 backdrop-blur-md rounded-2xl border border-border/60 dark:border-white/10 transition-all duration-300 shadow-sm shadow-primary/5 dark:shadow-none;
   }
   .theme-card:hover {
-    @apply bg-card/80 dark:bg-white/10;
+    @apply bg-card/90 dark:bg-white/10 shadow-md shadow-primary/10 dark:shadow-none;
   }
 
   /* Text classes */
@@ -173,9 +173,19 @@
 
   /* Navbar glass */
   .theme-navbar {
-    @apply bg-white/70 dark:bg-transparent backdrop-blur-md dark:backdrop-blur-sm;
+    @apply bg-card/70 dark:bg-transparent backdrop-blur-md dark:backdrop-blur-sm;
   }
   .theme-navbar-scrolled {
-    @apply bg-white/80 dark:bg-transparent backdrop-blur-lg dark:backdrop-blur-sm shadow-sm dark:shadow-none;
+    @apply bg-card/80 dark:bg-transparent backdrop-blur-lg dark:backdrop-blur-sm shadow-sm dark:shadow-none;
+  }
+
+  /* Light mode section depth */
+  .light-section {
+    @apply relative;
+  }
+  .light-section::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(180deg, transparent 0%, hsl(225 25% 92% / 0.5) 50%, transparent 100%);
   }
 }

@@ -96,7 +96,7 @@ const Contact = () => {
                 <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-muted-foreground mb-2">{t('contact.message')}</label>
                 <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={4} className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-card/80 dark:bg-white/5 border border-border/50 dark:border-white/20 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 resize-none text-sm sm:text-base shadow-sm" placeholder={t('contact.messagePlaceholder')} />
               </div>
-              <motion.button type="submit" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center space-x-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 text-sm sm:text-base text-white">
+              <motion.button type="submit" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center space-x-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 text-sm sm:text-base text-white shadow-md shadow-blue-500/20">
                 <Send size={18} className="sm:w-5 sm:h-5" />
                 <span>{t('contact.send')}</span>
               </motion.button>

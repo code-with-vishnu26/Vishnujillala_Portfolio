@@ -241,18 +241,18 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-background/95 backdrop-blur-lg border-t border-border"
+            className="lg:hidden bg-card/95 dark:bg-background/95 backdrop-blur-xl border-t border-border/50 shadow-lg shadow-primary/5 dark:shadow-none"
           >
-            <div className="container mx-auto px-4 py-4">
-              <div className="flex flex-col gap-2">
+            <div className="container mx-auto px-4 py-3">
+              <div className="flex flex-col gap-1">
                 {menuItems.map((item, index) => (
                   <motion.button
                     key={item.key}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ delay: index * 0.04 }}
                     onClick={() => handleNavClick(item.value)}
-                    className="w-full text-left px-4 py-3 text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-all duration-200 text-base font-medium uppercase"
+                    className="w-full text-left px-4 py-3.5 min-h-[48px] text-foreground hover:text-primary hover:bg-primary/8 dark:hover:bg-primary/5 active:bg-primary/15 rounded-xl transition-all duration-200 text-base font-medium uppercase flex items-center"
                   >
                     {t(item.key)}
                   </motion.button>

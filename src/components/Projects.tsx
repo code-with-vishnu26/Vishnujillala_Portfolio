@@ -94,7 +94,7 @@ const Projects = () => {
         </AnimatePresence>
 
         <motion.div className="flex justify-center mt-8 sm:mt-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <motion.button onClick={() => setShowAll(!showAll)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center gap-2 px-6 py-3 min-h-[44px] bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium text-sm sm:text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25">
+          <motion.button onClick={() => setShowAll(!showAll)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center gap-2 px-6 py-3 min-h-[44px] bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium text-sm sm:text-base transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/30 shadow-md shadow-purple-500/20">
             {showAll ? "Show Less" : "View All Projects"}
             {showAll ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
           </motion.button>
