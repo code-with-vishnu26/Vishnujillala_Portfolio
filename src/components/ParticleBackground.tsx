@@ -77,10 +77,10 @@ const ParticleBackground = () => {
         bgGradient.addColorStop(0.5, '#0d1117');
         bgGradient.addColorStop(1, '#0a0a0f');
       } else {
-        bgGradient.addColorStop(0, '#f0f4ff');
-        bgGradient.addColorStop(0.3, '#e8eeff');
-        bgGradient.addColorStop(0.7, '#f0ecff');
-        bgGradient.addColorStop(1, '#f0f4ff');
+        bgGradient.addColorStop(0, '#f8f9fc');
+        bgGradient.addColorStop(0.3, '#f0f3fa');
+        bgGradient.addColorStop(0.7, '#f3f0fa');
+        bgGradient.addColorStop(1, '#f8f9fc');
       }
       ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
