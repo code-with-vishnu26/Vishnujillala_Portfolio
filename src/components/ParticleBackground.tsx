@@ -107,7 +107,7 @@ const ParticleBackground = () => {
       }
 
       // Particles
-      const particleOpacity = isDark ? 1 : 0.4;
+      const particleOpacity = isDark ? 1 : 0.2;
       particles.forEach((particle) => {
         particle.x += particle.vx;
         particle.y += particle.vy;
@@ -122,7 +122,7 @@ const ParticleBackground = () => {
         if (isDark) {
           ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity * particleOpacity})`;
         } else {
-          ctx.fillStyle = `rgba(99, 102, 241, ${particle.opacity * particleOpacity})`;
+          ctx.fillStyle = `rgba(160, 140, 210, ${particle.opacity * particleOpacity})`;
         }
         ctx.fill();
       });
