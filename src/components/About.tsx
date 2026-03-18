@@ -266,7 +266,7 @@ const About = () => {
 
               {/* Location Card */}
               <motion.div 
-                className="bg-card/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl border border-border dark:border-white/10 cursor-pointer hover:bg-card/80 dark:hover:bg-white/10 transition-all duration-300 overflow-hidden shadow-sm dark:shadow-none"
+                className="bg-card/70 dark:bg-white/5 backdrop-blur-md rounded-2xl border border-border/60 dark:border-white/10 cursor-pointer hover:bg-card/90 dark:hover:bg-white/10 transition-all duration-300 overflow-hidden shadow-sm shadow-primary/5 dark:shadow-none hover:shadow-md hover:shadow-primary/10"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedCard('location')}
