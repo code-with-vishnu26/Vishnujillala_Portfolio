@@ -39,7 +39,7 @@ const Projects = () => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
       whileHover={{ y: -10 }}
-      className="bg-card/60 dark:bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-border dark:border-white/10 group shadow-sm dark:shadow-none hover:shadow-lg dark:hover:shadow-none transition-all duration-300"
+      className="bg-card/70 dark:bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-border/60 dark:border-white/10 group shadow-sm shadow-primary/5 dark:shadow-none hover:shadow-xl hover:shadow-primary/10 dark:hover:shadow-none transition-all duration-300"
     >
       {project.image && (
         <div className="h-36 sm:h-40 md:h-48 overflow-hidden">
@@ -94,7 +94,7 @@ const Projects = () => {
         </AnimatePresence>
 
         <motion.div className="flex justify-center mt-8 sm:mt-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <motion.button onClick={() => setShowAll(!showAll)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center gap-2 px-6 py-3 min-h-[44px] bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium text-sm sm:text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25">
+          <motion.button onClick={() => setShowAll(!showAll)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center gap-2 px-6 py-3 min-h-[44px] bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium text-sm sm:text-base transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/30 shadow-md shadow-purple-500/20">
             {showAll ? "Show Less" : "View All Projects"}
             {showAll ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
           </motion.button>

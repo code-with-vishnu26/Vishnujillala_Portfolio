@@ -65,13 +65,13 @@ const Hero = () => {
             >
               <a 
                 href="#professional-journey" 
-                className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 text-xs sm:text-sm md:text-base text-center text-white whitespace-nowrap"
+                className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-semibold hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105 text-xs sm:text-sm md:text-base text-center text-white whitespace-nowrap shadow-md shadow-purple-500/20"
               >
                 {t('hero.viewWork')}
               </a>
               <a 
                 href="#contact" 
-                className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 text-white text-xs sm:text-sm md:text-base text-center whitespace-nowrap"
+                className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full font-semibold hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 transform hover:scale-105 text-white text-xs sm:text-sm md:text-base text-center whitespace-nowrap shadow-md shadow-blue-500/20"
               >
                 {t('hero.contactMe')}
               </a>
@@ -79,7 +79,7 @@ const Hero = () => {
                 href="https://drive.google.com/uc?export=download&id=1LnZTFVzXaXV0IF8h0rPkJU_Rol5bRrrf" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 border border-foreground/30 dark:border-gray-400 rounded-full font-semibold hover:bg-foreground/5 dark:hover:bg-white/10 transition-all duration-300 text-xs sm:text-sm md:text-base text-center text-foreground whitespace-nowrap"
+                className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 border-2 border-foreground/20 dark:border-gray-400 rounded-full font-semibold hover:bg-foreground/8 dark:hover:bg-white/10 hover:border-primary/40 transition-all duration-300 text-xs sm:text-sm md:text-base text-center text-foreground whitespace-nowrap shadow-sm"
               >
                 {t('hero.downloadResume')}
               </a>
