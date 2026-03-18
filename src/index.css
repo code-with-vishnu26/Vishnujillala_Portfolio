@@ -39,9 +39,9 @@
     --glass-bg: 220 60% 98% / 0.7;
     --glass-border: 220 60% 80% / 0.3;
     --card-glass: 0 0% 100% / 0.6;
-    --text-primary: 222 47% 11%;
-    --text-secondary: 215 20% 35%;
-    --text-muted: 215 16% 47%;
+    --text-primary: 222 47% 5%;
+    --text-secondary: 215 25% 25%;
+    --text-muted: 215 16% 40%;
     --particle-color: 217 91% 60%;
     --particle-opacity: 0.08;
     --grid-opacity: 0.06;
