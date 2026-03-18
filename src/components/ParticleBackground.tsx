@@ -150,7 +150,7 @@ const ParticleBackground = () => {
       }
 
       // Code symbols
-      const symbolOpacity = isDark ? 1 : 0.5;
+      const symbolOpacity = isDark ? 1 : 0.25;
       codeSymbols.forEach((symbol) => {
         symbol.y -= symbol.speed;
         if (symbol.y < -30) {
@@ -162,7 +162,7 @@ const ParticleBackground = () => {
         if (isDark) {
           ctx.fillStyle = `rgba(99, 102, 241, ${symbol.opacity * symbolOpacity})`;
         } else {
-          ctx.fillStyle = `rgba(99, 102, 241, ${symbol.opacity * symbolOpacity})`;
+          ctx.fillStyle = `rgba(170, 150, 220, ${symbol.opacity * symbolOpacity})`;
         }
         ctx.fillText(symbol.symbol, symbol.x, symbol.y);
       });
