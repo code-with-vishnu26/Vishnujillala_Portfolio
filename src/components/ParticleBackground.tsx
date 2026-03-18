@@ -128,7 +128,7 @@ const ParticleBackground = () => {
       });
 
       // Connections
-      const maxDistance = 150;
+      const maxDistance = 120;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -136,12 +136,12 @@ const ParticleBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
           
           if (distance < maxDistance) {
-            const opacity = (1 - distance / maxDistance) * (isDark ? 0.15 : 0.08);
+            const opacity = (1 - distance / maxDistance) * (isDark ? 0.15 : 0.04);
             ctx.beginPath();
             ctx.strokeStyle = isDark 
               ? `rgba(59, 130, 246, ${opacity})`
-              : `rgba(99, 102, 241, ${opacity})`;
-            ctx.lineWidth = 1;
+              : `rgba(160, 140, 210, ${opacity})`;
+            ctx.lineWidth = isDark ? 1 : 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
