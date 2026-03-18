@@ -87,11 +87,11 @@ const ParticleBackground = () => {
 
       // Grid
       const gridSize = 50;
-      const gridOpacity = isDark ? 0.03 : 0.06;
+      const gridOpacity = isDark ? 0.03 : 0.03;
       ctx.strokeStyle = isDark 
         ? `rgba(59, 130, 246, ${gridOpacity})` 
-        : `rgba(99, 102, 241, ${gridOpacity})`;
-      ctx.lineWidth = 1;
+        : `rgba(180, 170, 220, ${gridOpacity})`;
+      ctx.lineWidth = 0.5;
 
       for (let x = 0; x < canvas.width; x += gridSize) {
         ctx.beginPath();
