@@ -168,18 +168,18 @@ const ParticleBackground = () => {
       });
 
       // Corner glows
-      const glowIntensity = isDark ? 0.05 : 0.08;
-      const glowGradient1 = ctx.createRadialGradient(0, 0, 0, 0, 0, canvas.width * 0.4);
-      glowGradient1.addColorStop(0, isDark ? `rgba(59, 130, 246, ${glowIntensity})` : `rgba(99, 102, 241, ${glowIntensity})`);
+      const glowIntensity = isDark ? 0.05 : 0.04;
+      const glowGradient1 = ctx.createRadialGradient(0, 0, 0, 0, 0, canvas.width * 0.35);
+      glowGradient1.addColorStop(0, isDark ? `rgba(59, 130, 246, ${glowIntensity})` : `rgba(140, 160, 220, ${glowIntensity})`);
       glowGradient1.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = glowGradient1;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const glowGradient2 = ctx.createRadialGradient(
         canvas.width, canvas.height, 0,
-        canvas.width, canvas.height, canvas.width * 0.4
+        canvas.width, canvas.height, canvas.width * 0.35
       );
-      glowGradient2.addColorStop(0, isDark ? `rgba(99, 102, 241, 0.04)` : `rgba(168, 85, 247, ${glowIntensity})`);
+      glowGradient2.addColorStop(0, isDark ? `rgba(99, 102, 241, 0.04)` : `rgba(180, 150, 220, ${glowIntensity})`);
       glowGradient2.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = glowGradient2;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
