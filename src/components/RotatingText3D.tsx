@@ -23,7 +23,7 @@ const RotatingText3D = () => {
   const letters = currentRole.split('');
 
   return (
-    <div className="text-xl md:text-2xl max-w-full mx-auto cursor-pointer text-left" onClick={handleRoleClick} style={{ perspective: "1000px" }}>
+    <div className="text-xl md:text-2xl max-w-full mx-auto lg:mx-0 cursor-pointer text-left" onClick={handleRoleClick} style={{ perspective: "1000px" }}>
       <div className="relative inline-block whitespace-nowrap">
         <div className="inline-block">
           <AnimatePresence mode="wait">
