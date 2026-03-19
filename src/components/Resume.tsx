@@ -21,7 +21,7 @@ const Resume = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <motion.a href="https://drive.google.com/uc?export=download&id=1tzCxxKywTCItE8WycimCWmbHQXDnHC0p" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center justify-center space-x-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 text-sm sm:text-base text-white">
+              <motion.a href="https://docs.google.com/document/d/1o5pxJWwWCvjAiMuzTyx01YDCdMtq7DUyhNPZR_kGzug/export?format=pdf" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center justify-center space-x-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 text-sm sm:text-base text-white">
                 <Download size={18} className="sm:w-5 sm:h-5" />
                 <span>{t('resume.download')}</span>
               </motion.a>
