@@ -251,7 +251,25 @@ const Navbar = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.04 }}
-                    onClick={() => handleNavClick(item.value)}
+                    onClick={() => {
+                      setIsOpen(false);
+                      if (item.value === "Resume") {
+                        window.open("https://drive.google.com/uc?export=download&id=1tzCxxKywTCItE8WycimCWmbHQXDnHC0p", "_blank");
+                        return;
+                      }
+                      const sectionMap: { [key: string]: string } = {
+                        "Home": "hero", "About": "about", "Projects": "projects",
+                        "Journey": "professional-journey", "Certifications": "certifications", "Contact": "contact"
+                      };
+                      const targetId = sectionMap[item.value];
+                      if (targetId === "hero") {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      } else if (targetId) {
+                        setTimeout(() => {
+                          document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+                        }, 100);
+                      }
+                    }}
                     className="w-full text-left px-4 py-3.5 min-h-[48px] text-foreground hover:text-primary hover:bg-primary/8 dark:hover:bg-primary/5 active:bg-primary/15 rounded-xl transition-all duration-200 text-base font-medium uppercase flex items-center"
                   >
                     {t(item.key)}

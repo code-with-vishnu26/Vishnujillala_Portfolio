@@ -22,13 +22,13 @@ const LanguageSwitcher = () => {
     <div className="relative">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 bg-transparent text-white rounded-2xl border border-white/30 hover:border-white/50 hover:bg-white/10 transition-all duration-300 gap-1 sm:gap-2"
+        className="flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 bg-transparent text-foreground rounded-2xl border border-border hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 gap-1 sm:gap-2"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         <div className="flex items-center space-x-1 sm:space-x-2">
-          <Globe size={14} className="text-gray-300 sm:w-4 sm:h-4" />
-          <span className="text-sm font-medium text-gray-300">
+          <Globe size={14} className="text-foreground/70 sm:w-4 sm:h-4" />
+          <span className="text-sm font-medium text-foreground/70">
             {currentLanguage?.flag}
           </span>
         </div>
@@ -36,7 +36,7 @@ const LanguageSwitcher = () => {
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
         >
-          <ChevronDown size={12} className="text-gray-300 sm:w-[14px] sm:h-[14px]" />
+          <ChevronDown size={12} className="text-foreground/70 sm:w-[14px] sm:h-[14px]" />
         </motion.div>
       </motion.button>
 
