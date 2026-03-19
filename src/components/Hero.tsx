@@ -76,7 +76,7 @@ const Hero = () => {
                 {t('hero.contactMe')}
               </a>
               <a 
-                href="https://drive.google.com/uc?export=download&id=1LnZTFVzXaXV0IF8h0rPkJU_Rol5bRrrf" 
+                href="https://docs.google.com/document/d/1o5pxJWwWCvjAiMuzTyx01YDCdMtq7DUyhNPZR_kGzug/export?format=pdf" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 border-2 border-foreground/20 dark:border-gray-400 rounded-full font-semibold hover:bg-foreground/8 dark:hover:bg-white/10 hover:border-primary/40 transition-all duration-300 text-xs sm:text-sm md:text-base text-center text-foreground whitespace-nowrap shadow-sm"
