@@ -4,46 +4,46 @@
 
 @layer base {
   :root {
-    /* Light mode - soft blue-lavender gradient feel */
-    --background: 225 25% 94%;
-    --foreground: 222 47% 8%;
+    /* Light mode - warm cream theme */
+    --background: 40 30% 92%;
+    --foreground: 30 20% 10%;
 
-    --card: 220 30% 97%;
-    --card-foreground: 222 47% 8%;
+    --card: 40 25% 95%;
+    --card-foreground: 30 20% 10%;
 
-    --popover: 220 30% 97%;
-    --popover-foreground: 222 47% 8%;
+    --popover: 40 25% 95%;
+    --popover-foreground: 30 20% 10%;
 
-    --primary: 217 91% 55%;
+    --primary: 217 91% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 225 25% 90%;
-    --secondary-foreground: 222 47% 8%;
+    --secondary: 40 20% 87%;
+    --secondary-foreground: 30 20% 10%;
 
-    --muted: 225 20% 88%;
-    --muted-foreground: 215 20% 35%;
+    --muted: 40 15% 85%;
+    --muted-foreground: 30 15% 30%;
 
-    --accent: 225 25% 90%;
-    --accent-foreground: 222 47% 8%;
+    --accent: 40 20% 87%;
+    --accent-foreground: 30 20% 10%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 84% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 18% 82%;
-    --input: 220 18% 82%;
-    --ring: 217 91% 55%;
+    --border: 40 15% 78%;
+    --input: 40 15% 78%;
+    --ring: 217 91% 45%;
 
     --radius: 0.5rem;
 
     /* Light mode specific tokens */
-    --glass-bg: 220 60% 98% / 0.8;
-    --glass-border: 220 40% 75% / 0.3;
-    --card-glass: 220 30% 99% / 0.7;
-    --text-primary: 222 47% 8%;
-    --text-secondary: 215 30% 22%;
-    --text-muted: 215 20% 35%;
-    --particle-color: 217 91% 60%;
-    --particle-opacity: 0.08;
+    --glass-bg: 40 30% 96% / 0.8;
+    --glass-border: 40 20% 70% / 0.3;
+    --card-glass: 40 25% 97% / 0.7;
+    --text-primary: 30 20% 10%;
+    --text-secondary: 30 15% 20%;
+    --text-muted: 30 10% 30%;
+    --particle-color: 217 91% 50%;
+    --particle-opacity: 0.1;
     --grid-opacity: 0.06;
     --glow-opacity: 0.08;
 
