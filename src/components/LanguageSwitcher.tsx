@@ -36,7 +36,7 @@ const LanguageSwitcher = () => {
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
         >
-          <ChevronDown size={12} className="text-gray-300 sm:w-[14px] sm:h-[14px]" />
+          <ChevronDown size={12} className="text-foreground/70 sm:w-[14px] sm:h-[14px]" />
         </motion.div>
       </motion.button>
 
