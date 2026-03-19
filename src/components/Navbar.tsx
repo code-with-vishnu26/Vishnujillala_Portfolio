@@ -254,7 +254,7 @@ const Navbar = () => {
                     onClick={() => {
                       setIsOpen(false);
                       if (item.value === "Resume") {
-                        window.open("https://drive.google.com/uc?export=download&id=1tzCxxKywTCItE8WycimCWmbHQXDnHC0p", "_blank");
+                        window.open("https://docs.google.com/document/d/1o5pxJWwWCvjAiMuzTyx01YDCdMtq7DUyhNPZR_kGzug/export?format=pdf", "_blank");
                         return;
                       }
                       const sectionMap: { [key: string]: string } = {
